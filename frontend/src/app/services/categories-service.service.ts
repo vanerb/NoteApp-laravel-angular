@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { Observable, from } from 'rxjs';
+import { AddCategory, UpdateCategory } from '../commands/category';
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +20,11 @@ export class CategoriesServiceService {
     return from(axios.get(`${this.baseUrl}/categories/${id}`));
   }
 
-  create(category: any){
+  create(category: AddCategory){
     return from(axios.post(`${this.baseUrl}/categories`, category))
   }
 
-  update(id: string, category: any){
+  update(id: string, category: UpdateCategory){
     return from(axios.put(`${this.baseUrl}/categories/${id}`, category))
   }
 

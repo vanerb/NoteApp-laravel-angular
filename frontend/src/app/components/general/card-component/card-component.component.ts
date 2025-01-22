@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { CardGeneral } from '../../../commands/general';
 
 @Component({
   selector: 'app-card-component',
@@ -7,12 +8,7 @@ import { Component, Input } from '@angular/core';
 })
 export class CardComponentComponent {
 
-  @Input() item!: {
-    id: string;
-    name: string;
-    description: string;
-    url: string
-  }
+  @Input() item!: CardGeneral
 
 
 

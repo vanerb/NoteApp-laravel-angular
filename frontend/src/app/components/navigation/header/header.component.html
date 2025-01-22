@@ -1,0 +1,7 @@
+<div class="w-full flex justify-start items-center bg-slate-700">
+    <div class=" flex justify-center items-center text-white">
+        <div class="cursor-pointer p-4 hover:bg-slate-500" [routerLink]="[item.url]" *ngFor="let item of pages">
+            <span>{{ item.name }}</span>
+        </div>
+    </div>
+</div>

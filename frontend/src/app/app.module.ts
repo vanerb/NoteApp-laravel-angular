@@ -12,6 +12,8 @@ import { ReactiveFormsModule } from '@angular/forms';  // Importa ReactiveFormsM
 import { ServerModule } from '@angular/platform-server';
 import { CategoriesPageComponent } from './components/pages/categories-page/categories-page.component';
 import { AdminCategoriesComponent } from './components/pages/categories-page/components/admin-categories/admin-categories.component';
+import { HeaderComponent } from './components/navigation/header/header.component';
+import { FooterComponent } from './components/navigation/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { AdminCategoriesComponent } from './components/pages/categories-page/com
     ModalComponentComponent,
     AdminNotesComponent,
     CategoriesPageComponent,
-    AdminCategoriesComponent
+    AdminCategoriesComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CategoriesServiceService } from '../../../../../services/categories-service.service';
 import { NotesServiceService } from '../../../../../services/notes-service.service';
 import { ActivatedRoute } from '@angular/router';
+import { AddNote, UpdateNote } from '../../../../../commands/note';
+import { Category } from '../../../../../models/category';
 
 @Component({
   selector: 'app-admin-notes',
@@ -12,13 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 export class AdminNotesComponent implements OnInit {
   form!: FormGroup;
 
-  categories: {
-    id: string;
-    name: string;
-    user_id: string;
-    created_at: string;
-    updated_at: string;
-  }[] = [];
+  categories: Category[] = [];
 
   noteId: string | null = null;
   isEdit: boolean = false;
@@ -73,7 +69,7 @@ export class AdminNotesComponent implements OnInit {
   }
 
   addNote() {
-    let note = {
+    let note: AddNote = {
       name: this.form.get('name')?.value ?? '',
       description: this.form.get('description')?.value,
       user_id: '1',
@@ -93,7 +89,7 @@ export class AdminNotesComponent implements OnInit {
   }
 
   editNote() {
-    let note = {
+    let note: UpdateNote = {
       name: this.form.get('name')?.value ?? '',
       description: this.form.get('description')?.value,
       user_id: '1',

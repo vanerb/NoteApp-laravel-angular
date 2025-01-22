@@ -3,6 +3,7 @@ import { CategoriesServiceService } from '../../../../../services/categories-ser
 import { NotesServiceService } from '../../../../../services/notes-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Category } from '../../../../../models/category';
 
 @Component({
   selector: 'app-admin-categories',
@@ -12,13 +13,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class AdminCategoriesComponent {
   form!: FormGroup;
 
-  categories: {
-    id: string;
-    name: string;
-    user_id: string;
-    created_at: string;
-    updated_at: string;
-  }[] = [];
+  categories: Category[] = [];
 
   categoryId: string | null = null;
   isEdit: boolean = false;
