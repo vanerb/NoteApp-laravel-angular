@@ -1,0 +1,21 @@
+<div class="w-full h-full flex justify-center items-center p-4">
+    <div class="w-[60vh] p-4 bg-slate-700 rounded text-white">
+        <form [formGroup]="form">
+            <div class="w-full flex flex-col">
+              <label for="email">Email</label>
+              <input class="w-full p-2 text-black h-[40px] border rounded" id="email" formControlName="email" />
+            </div>
+            <div class="w-full flex flex-col">
+                <label for="pasword">Contraseña</label>
+                <input type="password" class="w-full p-2 text-black h-[40px] border rounded" id="pasword" formControlName="password" />
+              </div>
+    
+            <div class="w-full flex justify-end items-center">
+              
+                <button  (click)="login()" class="h-[40px] mt-4 rounded bg-green-700 px-[16px] text-white" type="submit" [disabled]="!form.valid">Iniciar sesión</button>
+            </div>
+           
+          </form>
+    </div>
+   
+</div>

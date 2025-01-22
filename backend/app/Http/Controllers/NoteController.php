@@ -23,7 +23,7 @@ class NoteController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'descripcion' => 'required|string',
+            'description' => 'required|string',
             'user_id' => 'required|exists:users,id',
             'category_id' => 'required|exists:categories,id',
         ]);
@@ -55,7 +55,7 @@ class NoteController extends Controller
         }
         $request->validate([
             'name' => 'required|string|max:255',
-            'descripcion' => 'required|string',
+            'description' => 'required|string',
             'user_id' => 'required|exists:users,id',
             'category_id' => 'required|exists:categories,id',
         ]);
