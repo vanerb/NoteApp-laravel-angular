@@ -14,6 +14,8 @@ import { CategoriesPageComponent } from './components/pages/categories-page/cate
 import { AdminCategoriesComponent } from './components/pages/categories-page/components/admin-categories/admin-categories.component';
 import { HeaderComponent } from './components/navigation/header/header.component';
 import { FooterComponent } from './components/navigation/footer/footer.component';
+import { LoginPageComponent } from './components/pages/login-page/login-page.component';
+import { RegisterPageComponent } from './components/pages/register-page/register-page.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { FooterComponent } from './components/navigation/footer/footer.component
     CategoriesPageComponent,
     AdminCategoriesComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    LoginPageComponent,
+    RegisterPageComponent
   ],
   imports: [
     BrowserModule,

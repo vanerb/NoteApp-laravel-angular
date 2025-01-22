@@ -8,4 +8,6 @@ export interface CardGeneral {
 export interface HeaderGeneral {
     name: string;
     url: string;
+    isEnabled: boolean;
+    action?:()=>void
 }
