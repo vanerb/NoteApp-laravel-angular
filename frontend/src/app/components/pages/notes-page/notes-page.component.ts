@@ -28,6 +28,10 @@ export class NotesPageComponent implements OnInit {
         },
       });
     }
+
+    if(data.key === 'open'){
+      window.location.href = window.location.origin+"/details/"+data.id
+    }
   }
 
 

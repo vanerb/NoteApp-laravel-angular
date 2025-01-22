@@ -72,12 +72,9 @@ export class AdminCategoriesComponent {
 
     this.categoriesService.create(note).subscribe({
       next: (response) => {
-        console.log('Producto creado con éxito:', response.data);
-        alert('Producto creado correctamente.');
+        window.location.href = window.location.origin+"/categories"
       },
       error: (err) => {
-        console.error('Error al crear el producto:', err);
-        alert('Hubo un error al crear el producto.');
       },
     });
   }
@@ -91,12 +88,10 @@ export class AdminCategoriesComponent {
     if (this.categoryId !== null) {
       this.categoriesService.update(this.categoryId, note).subscribe({
         next: (response) => {
-          console.log('Producto editado con éxito:', response.data);
-          alert('Producto creado correctamente.');
+          window.location.href = window.location.origin+"/categories"
         },
         error: (err) => {
           console.error('Error al crear el producto:', err);
-          alert('Hubo un error al crear el producto.');
         },
       });
     }

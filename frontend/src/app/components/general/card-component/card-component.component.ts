@@ -16,4 +16,11 @@ export class CardComponentComponent {
       id: id,
     });
   }
+
+  open(id: string) {
+    this.action.emit({
+      key: 'open',
+      id: id,
+    });
+  }
 }

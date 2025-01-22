@@ -8,6 +8,7 @@ import { CategoriesPageComponent } from './components/pages/categories-page/cate
 import { LoginPageComponent } from './components/pages/login-page/login-page.component';
 import { RegisterPageComponent } from './components/pages/register-page/register-page.component';
 import { AuthGuard } from './auth.guard';
+import { DetailsPageComponent } from './components/pages/details-page/details-page.component';
 
 const routes: Routes = [
   { path: '', component: WelcomePageComponent },
@@ -36,6 +37,12 @@ const routes: Routes = [
   {
     path: 'admin-categories/:id',
     component: AdminCategoriesComponent,
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: 'details/:id',
+    component: DetailsPageComponent,
     canActivate: [AuthGuard],
   },
 

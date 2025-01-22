@@ -80,12 +80,10 @@ export class AdminNotesComponent implements OnInit {
 
     this.notesService.create(note).subscribe({
       next: (response) => {
-        console.log('Producto creado con éxito:', response.data);
-        alert('Producto creado correctamente.');
+       window.location.href = window.location.origin+"/notes"
       },
       error: (err) => {
         console.error('Error al crear el producto:', err);
-        alert('Hubo un error al crear el producto.');
       },
     });
   }
@@ -101,12 +99,10 @@ export class AdminNotesComponent implements OnInit {
     if (this.noteId !== null) {
       this.notesService.update(this.noteId, note).subscribe({
         next: (response) => {
-          console.log('Producto editado con éxito:', response.data);
-          alert('Producto creado correctamente.');
+         window.location.href = window.location.origin+"/notes"
         },
         error: (err) => {
           console.error('Error al crear el producto:', err);
-          alert('Hubo un error al crear el producto.');
         },
       });
     }
