@@ -1,0 +1,39 @@
+# Laravel (Backend)
+/backend/.env
+/backend/.env.*
+/backend/vendor/
+/backend/node_modules/
+/backend/public/storage
+/backend/storage/*.key
+/backend/.idea/
+/backend/phpunit.xml
+/backend/phpunit.xml.dist
+/backend/.vscode/
+/backend/Homestead.yaml
+/backend/.vagrant
+/backend/.composer
+
+# Angular (Frontend)
+/frontend/node_modules/
+/frontend/dist/
+/frontend/out-tsc/
+/frontend/coverage/
+/frontend/.angular/
+/frontend/.idea/
+/frontend/.vscode/
+/frontend/*.log
+/frontend*.bak
+/frontend*.swp
+/frontend*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE and editor files
+.vscode/
+.idea/
+
+# Laravel environment files
+/backend/.env.local
+/backend/.env.testing
