@@ -26,7 +26,6 @@ export class LoginPageComponent {
     this.form = new FormGroup({
       email: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
-      password_confirmation: new FormControl('', Validators.required),
     });
   }
 
@@ -34,14 +33,13 @@ export class LoginPageComponent {
     let user = {
       email: this.form.get('email')?.value,
       password: this.form.get('password')?.value,
-      password_confirmation: this.form.get('password_confirmation')?.value
     };
 
     this.authService.login(user).subscribe({
       next: (response) => {
         this.authService.saveToken(response.data.token)
+        this.authService.saveUser(response.data.user)
         window.location.href = window.location.origin +"/"
-
       },
       error: (err) => {
         console.error('Error al crear el producto:', err);

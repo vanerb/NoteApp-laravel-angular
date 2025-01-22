@@ -13,6 +13,25 @@ export class NotesPageComponent implements OnInit {
   constructor(private notesService: NotesServiceService) {}
 
   ngOnInit() {
+   
+    this.update()
+  }
+
+  action(data: { key: string; id: string }) {
+    if (data.key === 'delete') {
+      this.notesService.delete(data.id).subscribe({
+        next: (response) => {
+          this.update()
+        },
+        error: (err) => {
+          console.error('Error al obtener categorias:', err);
+        },
+      });
+    }
+  }
+
+
+  update(){
     this.notesService.all().subscribe({
       next: (response) => {
         this.notes = response.data

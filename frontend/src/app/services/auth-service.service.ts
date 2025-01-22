@@ -22,6 +22,7 @@ export class AuthServiceService {
   logout() {
     if (typeof window !== 'undefined' && window.localStorage) {
       localStorage.removeItem('auth_token');
+      localStorage.removeItem('user');
     }
     // return from(axios.post(`${this.baseUrl}/logout`));
   }
@@ -32,12 +33,26 @@ export class AuthServiceService {
     }
   }
 
+  saveUser(user: any) {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.setItem('user', JSON.stringify(user));
+    }
+  }
+
   // Método para obtener el token
   getToken(): string | null {
     if (typeof window !== 'undefined' && window.localStorage) {
       return localStorage.getItem('auth_token');
     }
-    return null
+    return null;
+  }
+
+  getUser(): any | null {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      let user = localStorage.getItem('user');
+      return user ? JSON.parse(user) : null; 
+    }
+    return null;
   }
 
   // Método para verificar si el usuario está autenticado

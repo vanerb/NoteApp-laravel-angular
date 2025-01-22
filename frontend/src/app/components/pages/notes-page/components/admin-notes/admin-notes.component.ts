@@ -5,6 +5,7 @@ import { NotesServiceService } from '../../../../../services/notes-service.servi
 import { ActivatedRoute } from '@angular/router';
 import { AddNote, UpdateNote } from '../../../../../commands/note';
 import { Category } from '../../../../../models/category';
+import { AuthServiceService } from '../../../../../services/auth-service.service';
 
 @Component({
   selector: 'app-admin-notes',
@@ -22,7 +23,8 @@ export class AdminNotesComponent implements OnInit {
   constructor(
     private readonly categoriesService: CategoriesServiceService,
     private readonly notesService: NotesServiceService,
-    private readonly activatedRoute: ActivatedRoute
+    private readonly activatedRoute: ActivatedRoute,
+    private readonly authService: AuthServiceService
   ) {}
 
   ngOnInit() {
@@ -72,7 +74,7 @@ export class AdminNotesComponent implements OnInit {
     let note: AddNote = {
       name: this.form.get('name')?.value ?? '',
       description: this.form.get('description')?.value,
-      user_id: '1',
+      user_id:  this.authService.getUser().id,
       category_id: this.form.get('category')?.value,
     };
 
@@ -92,7 +94,7 @@ export class AdminNotesComponent implements OnInit {
     let note: UpdateNote = {
       name: this.form.get('name')?.value ?? '',
       description: this.form.get('description')?.value,
-      user_id: '1',
+      user_id:  this.authService.getUser().id,
       category_id: this.form.get('category')?.value,
     };
 

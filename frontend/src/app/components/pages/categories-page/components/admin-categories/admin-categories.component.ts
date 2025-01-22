@@ -4,6 +4,7 @@ import { NotesServiceService } from '../../../../../services/notes-service.servi
 import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Category } from '../../../../../models/category';
+import { AuthServiceService } from '../../../../../services/auth-service.service';
 
 @Component({
   selector: 'app-admin-categories',
@@ -20,7 +21,8 @@ export class AdminCategoriesComponent {
 
   constructor(
     private readonly categoriesService: CategoriesServiceService,
-    private readonly activatedRoute: ActivatedRoute
+    private readonly activatedRoute: ActivatedRoute,
+    private readonly authService: AuthServiceService
   ) {}
 
   ngOnInit() {
@@ -65,7 +67,7 @@ export class AdminCategoriesComponent {
   addNote() {
     let note = {
       name: this.form.get('name')?.value ?? '',
-      user_id: '1',
+      user_id: this.authService.getUser().id,
     };
 
     this.categoriesService.create(note).subscribe({
@@ -83,7 +85,7 @@ export class AdminCategoriesComponent {
   editNote() {
     let note = {
       name: this.form.get('name')?.value ?? '',
-      user_id: '1',
+      user_id: this.authService.getUser().id,
     };
 
     if (this.categoryId !== null) {

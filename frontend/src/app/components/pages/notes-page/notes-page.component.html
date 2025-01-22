@@ -1,10 +1,12 @@
 
 <div class="gap-4 grid grid-flow-col justify-center items-center p-4">
-    <app-card-component *ngFor="let item of notes" [item]="{id: item.id, name: item.name, description: item.description, url: '/admin-categories'}"></app-card-component>
-    <div class="w-[200px] h-[150px] border border-dotted flex flex-col justify-center items-center cursor-pointer hover:shadow">
-        <div></div>
-        <div [routerLink]="['/admin-notes']">
-            <span>Añadir</span>
+    <app-card-component (action)="action($event)" *ngFor="let item of notes" [item]="{id: item.id, name: item.name, description: item.description, url: '/admin-categories'}"></app-card-component>
+    <div  [routerLink]="['/admin-notes']" class="w-[200px] h-[170px] border border-dotted flex flex-col justify-center items-center cursor-pointer hover:shadow">
+        <div>
+            <i class="bi bi-plus text-[50px]"></i>
+        </div>
+        <div>
+            <span>Añadir nota</span>
         </div>
     </div>
 </div>
