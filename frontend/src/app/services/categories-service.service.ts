@@ -16,6 +16,10 @@ export class CategoriesServiceService {
     return from(axios.get(`${this.baseUrl}/categories`));
   }
 
+  byUserId(id: string) {
+    return from(axios.get(`${this.baseUrl}/categories/user/${id}`));
+  }
+
   byId(id: string) {
     return from(axios.get(`${this.baseUrl}/categories/${id}`));
   }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NotesServiceService } from '../../../services/notes-service.service';
 import { Note } from '../../../models/note';
+import { AuthServiceService } from '../../../services/auth-service.service';
 
 @Component({
   selector: 'app-notes-page',
@@ -10,7 +11,7 @@ import { Note } from '../../../models/note';
 export class NotesPageComponent implements OnInit {
   notes: Note[] = [];
 
-  constructor(private notesService: NotesServiceService) {}
+  constructor(private notesService: NotesServiceService, private authService: AuthServiceService) {}
 
   ngOnInit() {
    
@@ -36,7 +37,7 @@ export class NotesPageComponent implements OnInit {
 
 
   update(){
-    this.notesService.all().subscribe({
+    this.notesService.byUserId(this.authService.getUser().id).subscribe({
       next: (response) => {
         this.notes = response.data
       },

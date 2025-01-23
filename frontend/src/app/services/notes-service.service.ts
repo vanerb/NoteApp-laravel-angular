@@ -19,6 +19,10 @@ export class NotesServiceService {
     return from(axios.get(`${this.baseUrl}/notes/${id}`));
   }
 
+  byUserId(id: string) {
+    return from(axios.get(`${this.baseUrl}/notes/user/${id}`));
+  }
+
   create(note: AddNote){
     return from(axios.post(`${this.baseUrl}/notes`, note))
   }

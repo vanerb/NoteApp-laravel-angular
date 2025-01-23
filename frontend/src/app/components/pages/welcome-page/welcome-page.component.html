@@ -1,1 +1,10 @@
-<p>welcome-page works!</p>
+<div class="w-full h-full flex justify-center items-center">
+    <div [routerLink]="'/notes'" class="w-[50%] h-[calc(100vh_-_56px)] bg-slate-400 text-white
+     flex justify-center items-center text-2xl hover:text-3xl cursor-pointer">
+        <span>Notas</span>
+    </div>
+
+    <div  [routerLink]="'/categories'" class="w-[50%] h-[calc(100vh_-_56px)] bg-slate-500 text-white flex justify-center items-center text-2xl hover:text-3xl cursor-pointer">
+        <span >Categorias</span>
+    </div>
+</div>

@@ -32,7 +32,7 @@ class CategoryController extends Controller
         $category->created_at = new DateTime();
         $category->updated_at = new DateTime();
         $category->save();
-       // $category = Category::create($request->all());
+        // $category = Category::create($request->all());
         return response()->json($category, 201);
     }
 
@@ -42,6 +42,15 @@ class CategoryController extends Controller
     public function show(string $id)
     {
         $category = Category::find($id);
+        if (!$category) {
+            return response()->json(['error' => 'Categoria no encontrada'], 404);
+        }
+        return response()->json($category);
+    }
+
+    public function byUserId(string $id)
+    {
+        $category = Category::where('user_id', $id)->get();
         if (!$category) {
             return response()->json(['error' => 'Categoria no encontrada'], 404);
         }

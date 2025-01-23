@@ -32,6 +32,15 @@ class NoteController extends Controller
         return response()->json($note, 201);
     }
 
+    public function byUserId(string $id)
+    {
+        $category = Note::where('user_id', $id)->get();
+        if (!$category) {
+            return response()->json(['error' => 'Categoria no encontrada'], 404);
+        }
+        return response()->json($category);
+    }
+
     /**
      * Display the specified resource.
      */

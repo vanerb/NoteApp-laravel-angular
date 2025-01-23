@@ -16,6 +16,9 @@ Route::apiResource('users', UserController::class);
 
 Route::apiResource('categories', CategoryController::class);
 
+Route::get('/categories/user/{id}', [CategoryController::class, 'byUserId']);
+Route::get('/notes/user/{id}', [NoteController::class, 'byUserId']);
+
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
