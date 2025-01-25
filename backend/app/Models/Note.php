@@ -17,4 +17,9 @@ class Note extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
 }

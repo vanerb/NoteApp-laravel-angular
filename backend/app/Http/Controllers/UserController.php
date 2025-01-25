@@ -26,12 +26,14 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
+            'role' => 'required|string',
             'password' => 'required|min:8|confirmed',
         ]);
 
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->role = $request->role;
         $user->password = Hash::make($request->password);
         $user->created_at = new DateTime();
         $user->updated_at = new DateTime();
@@ -64,11 +66,13 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
+            'role' => 'required|string',
             'password' => 'required|min:8|confirmed',
         ]);
 
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->role = $request->role;
         $user->password = Hash::make($request->password);
         $user->updated_at = new DateTime();
         $user->save();
