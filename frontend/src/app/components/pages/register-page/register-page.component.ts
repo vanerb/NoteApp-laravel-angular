@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthServiceService } from '../../../services/auth-service.service';
 import { Router } from '@angular/router';
+import { ModalService } from '../../../services/modal.service';
+import { ModalComponentComponent } from '../../general/modal-component/modal-component.component';
 
 @Component({
   selector: 'app-register-page',
@@ -9,13 +11,14 @@ import { Router } from '@angular/router';
   styleUrl: './register-page.component.css'
 })
 export class RegisterPageComponent {
- form!: FormGroup;
+  form!: FormGroup;
 
 
 
   constructor(
     private readonly authService: AuthServiceService,
-  ) {}
+    private readonly modalService: ModalService
+  ) { }
 
   ngOnInit() {
     this.formBuilder();
@@ -32,19 +35,77 @@ export class RegisterPageComponent {
 
   register() {
     let user = {
-      name:  this.form.get('name')?.value,
+      name: this.form.get('name')?.value,
       email: this.form.get('email')?.value,
       password: this.form.get('password')?.value,
       password_confirmation: this.form.get('password_confirmation')?.value
     };
 
-    this.authService.register(user).subscribe({
-      next: (response) => {
-        window.location.href = window.location.origin +"/login"
-      },
-      error: (err) => {
-        console.error('Error al crear el producto:', err);
-      },
-    });
+    if (user.password === user.password_confirmation) {
+      this.authService.register(user).subscribe({
+        next: (response) => {
+          window.location.href = window.location.origin + "/login"
+        },
+        error: (err) => {
+          console.log(err)
+          if (err.response.data.errors.email) {
+            this.modalService.openModal(ModalComponentComponent, {
+              data: {
+                title: 'Error',
+                content: 'Ya existe una cuenta asociado a este correo. Pruebe con otro.',
+                isAction: false,
+                actionName: 'Aceptar',
+                acceptAction: () => {
+
+                },
+                cancelAction: () => {
+                  this.modalService.closeModal()
+                }
+
+              },
+            });
+          }
+          else if (err.response.data.errors.password) {
+            this.modalService.openModal(ModalComponentComponent, {
+              data: {
+                title: 'Error',
+                content: 'La contraseña tiene que tener al menos 8 caracteres.',
+                isAction: false,
+                actionName: 'Aceptar',
+                acceptAction: () => {
+
+                },
+                cancelAction: () => {
+                  this.modalService.closeModal()
+                }
+
+              },
+            });
+          }
+
+        },
+      });
+    }
+    else {
+      this.modalService.openModal(ModalComponentComponent, {
+        data: {
+          title: 'Error',
+          content: 'La contraseña debe coincidir',
+          isAction: false,
+          actionName: 'Aceptar',
+          acceptAction: () => {
+
+          },
+          cancelAction: () => {
+            this.modalService.closeModal()
+          }
+
+        },
+      });
+    }
+
+
+
+
   }
 }
