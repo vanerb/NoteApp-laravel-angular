@@ -1,29 +1,58 @@
 <div class="w-full h-full flex justify-center items-center p-4">
     <div class="w-[60vh] p-4 bg-slate-700 rounded text-white">
         <form [formGroup]="form">
-            <div class="w-full flex flex-col">
-              <label for="name">Nombre</label>
-              <input class="w-full p-2 text-black h-[40px] border rounded" id="name" formControlName="name" />
-            </div>
-    
-            <div>
-                <label for="description">Descripcion</label>
-                <textarea rows="10" class="w-full p-2 text-black  border rounded" id="description" formControlName="description"></textarea>
+            <div class="my-2">
+                <div class="w-full flex flex-col">
+                    <label for="name">Nombre</label>
+                    <input class="w-full p-2 text-black h-[40px] border rounded" id="name" formControlName="name" />
+                </div>
             </div>
 
-            <div>
+            <div class="my-2">
+                <label for="description">Descripcion</label>
+                <textarea rows="10" class="w-full p-2 text-black  border rounded" id="description"
+                    formControlName="description"></textarea>
+            </div>
+
+            <div class="my-2">
+                <label for="images">Imágenes</label>
+                <input class="w-full p-1 h-[40px] border rounded text-white" type="file" id="images"
+                    (change)="onFileChange($event)" multiple />
+            </div>
+
+
+            <div class="flex flex-wrap gap-4 my-2 justify-center items-center" *ngIf="isEdit">
+
+                <div class="w-[80x] h-[100px]" *ngFor="let image of note?.images">
+                    <div  class="h-[calc(100px_-_40px)] w-[80px] overflow-hidden">
+                        <img class="object-cover" [src]="'http://127.0.0.1:8000/storage/' + image.path" alt="Imagen" width="100" />
+                    </div>
+                  
+                    <button class="h-[40px] mt-2 bg-slate-500 hover:bg-slate-400 text-white px-[16px] rounded" type="button" (click)="markImageForDeletion(image.id)">
+                        Eliminar
+                    </button>
+                </div>
+            </div>
+
+
+            <div class="my-2">
                 <label for="category">Categoria</label>
                 <select class="w-full p-1 h-[40px] border rounded text-black" id="category" formControlName="category">
-                    <option class="text-black" value="{{ category.id }}" *ngFor="let category of categories">{{ category.name }}</option>
+                    <option class="text-black" value="{{ category.id }}" *ngFor="let category of categories">{{
+                        category.name }}</option>
                 </select>
             </div>
-    
+
             <div class="w-full flex justify-end items-center">
-                <button *ngIf="!this.isEdit" (click)="addNote()" class="h-[40px] mt-4 rounded bg-green-700 px-[16px] text-white" type="submit" [disabled]="!form.valid">Crear</button>
-                <button *ngIf="this.isEdit" (click)="editNote()" class="h-[40px] mt-4 rounded bg-green-700 px-[16px] text-white" type="submit" [disabled]="!form.valid">Editar</button>
+                <button *ngIf="!this.isEdit" (click)="addNote()"
+                    class="h-[40px] mt-4 rounded bg-green-700 px-[16px] text-white" type="submit"
+                    [disabled]="!form.valid">Crear</button>
+                <button *ngIf="this.isEdit" (click)="editNote()"
+                    class="h-[40px] mt-4 rounded bg-green-700 px-[16px] text-white" type="submit"
+                    [disabled]="!form.valid">Editar</button>
             </div>
-           
-          </form>
+
+        </form>
     </div>
-   
+
 </div>

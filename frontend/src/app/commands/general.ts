@@ -3,6 +3,7 @@ export interface CardGeneral {
   name: string;
   description: string;
   url: string;
+  images: any[]
 }
 
 export interface HeaderGeneral {

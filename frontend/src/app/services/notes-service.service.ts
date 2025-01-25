@@ -23,12 +23,12 @@ export class NotesServiceService {
     return from(axios.get(`${this.baseUrl}/notes/user/${id}`));
   }
 
-  create(note: AddNote){
+  create(note: FormData){
     return from(axios.post(`${this.baseUrl}/notes`, note))
   }
 
-  update(id: string, note: UpdateNote){
-    return from(axios.put(`${this.baseUrl}/notes/${id}`, note))
+  update(id: string | null, note: FormData){
+    return from(axios.post(`${this.baseUrl}/notes/${id}`, note))
   }
 
   delete(id: string){

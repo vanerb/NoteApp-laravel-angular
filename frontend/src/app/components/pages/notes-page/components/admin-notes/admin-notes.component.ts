@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AddNote, UpdateNote } from '../../../../../commands/note';
 import { Category } from '../../../../../models/category';
 import { AuthServiceService } from '../../../../../services/auth-service.service';
+import { Note } from '../../../../../models/note';
 
 @Component({
   selector: 'app-admin-notes',
@@ -19,13 +20,19 @@ export class AdminNotesComponent implements OnInit {
 
   noteId: string | null = null;
   isEdit: boolean = false;
+  images: File[] = [];
+
+  note!: Note
+
+  imagesToUpload: File[] = [];
+  imagesToDelete: number[] = [];
 
   constructor(
     private readonly categoriesService: CategoriesServiceService,
     private readonly notesService: NotesServiceService,
     private readonly activatedRoute: ActivatedRoute,
     private readonly authService: AuthServiceService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.formBuilder();
@@ -60,6 +67,28 @@ export class AdminNotesComponent implements OnInit {
         });
       }
     }
+
+    this.getNote()
+  }
+
+  markImageForDeletion(imageId: number): void {
+    this.imagesToDelete.push(imageId);
+    this.note.images = this.note.images.filter((img: any) => img.id !== imageId);
+  }
+
+
+  getNote() {
+    if (this.noteId !== null) {
+      this.notesService.byId(this.noteId).subscribe({
+        next: (response) => {
+
+          this.note = response.data
+        },
+        error: (err) => {
+          console.error('Error al obtener categorias:', err);
+        },
+      });
+    }
   }
 
   formBuilder() {
@@ -70,17 +99,26 @@ export class AdminNotesComponent implements OnInit {
     });
   }
 
-  addNote() {
-    let note: AddNote = {
-      name: this.form.get('name')?.value ?? '',
-      description: this.form.get('description')?.value,
-      user_id:  this.authService.getUser().id,
-      category_id: this.form.get('category')?.value,
-    };
+  onFileChange(event: any): void {
+    this.images = Array.from(event.target.files);
+  }
 
-    this.notesService.create(note).subscribe({
+  addNote() {
+    const formData = new FormData();
+
+    formData.append('name', this.form.get('name')?.value);
+    formData.append('description', this.form.get('description')?.value);
+    formData.append('user_id', this.authService.getUser().id);
+    formData.append('category_id', this.form.get('category')?.value);
+
+    this.images.forEach((image, index) => {
+      formData.append(`images[${index}]`, image);
+    });
+
+    console.log(formData, this.form)
+    this.notesService.create(formData).subscribe({
       next: (response) => {
-       window.location.href = window.location.origin+"/notes"
+        window.location.href = window.location.origin + "/notes"
       },
       error: (err) => {
         console.error('Error al crear el producto:', err);
@@ -89,22 +127,29 @@ export class AdminNotesComponent implements OnInit {
   }
 
   editNote() {
-    let note: UpdateNote = {
-      name: this.form.get('name')?.value ?? '',
-      description: this.form.get('description')?.value,
-      user_id:  this.authService.getUser().id,
-      category_id: this.form.get('category')?.value,
-    };
+    const formData = new FormData()
 
-    if (this.noteId !== null) {
-      this.notesService.update(this.noteId, note).subscribe({
-        next: (response) => {
-         window.location.href = window.location.origin+"/notes"
-        },
-        error: (err) => {
-          console.error('Error al crear el producto:', err);
-        },
-      });
-    }
+    formData.append('name', this.form.get('name')?.value);
+    formData.append('description', this.form.get('description')?.value);
+    formData.append('user_id', this.authService.getUser().id);
+    formData.append('category_id', this.form.get('category')?.value);
+
+    this.images.forEach((image, index) => {
+      formData.append(`images[${index}]`, image);
+    });
+
+    this.imagesToDelete.forEach((id) =>
+      formData.append('deleted_images[]', id.toString())
+    );
+
+    this.notesService.update(this.noteId, formData).subscribe({
+      next: (response) => {
+        window.location.href = window.location.origin + "/notes"
+      },
+      error: (err) => {
+        console.error('Error al crear el producto:', err);
+      },
+    });
+
   }
 }

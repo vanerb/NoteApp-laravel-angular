@@ -1,4 +1,4 @@
-<div  class="w-[200px] h-[170px] border rounded p-4 hover:shadow cursor-pointer relative">
+<div class="w-[200px] h-[170px] border rounded p-4 hover:shadow cursor-pointer relative">
     <div (click)="open(item.id)" class="flex flex-col">
         <div>
             <span class="text-xl">{{ item?.name }}</span>
@@ -7,13 +7,19 @@
             <span class="text-base text-wrap">{{ item?.description }}</span>
         </div>
     </div>
+
+    <div class="absolute left-2 bottom-2" *ngIf="item.images.length > 0">{{ item.images.length }} imagenes</div>
     <div class="absolute bottom-2 flex justify-center items-center right-2">
-        <div (click)="delete(item.id)" class="flex justify-center items-center rounded-full text-white  bg-slate-500 w-[32px] h-[32px] hover:bg-slate-400">
+        <div (click)="delete(item.id)"
+            class="flex justify-center items-center rounded-full text-white  bg-slate-500 w-[32px] h-[32px] hover:bg-slate-400">
             <i class="bi bi-trash"></i>
         </div>
-        <div [routerLink]="[item.url, item?.id]" class="flex justify-center items-center  ml-2 rounded-full text-white  bg-slate-500 w-[32px] h-[32px] hover:bg-slate-400">
+        <div [routerLink]="[item.url, item?.id]"
+            class="flex justify-center items-center  ml-2 rounded-full text-white  bg-slate-500 w-[32px] h-[32px] hover:bg-slate-400">
             <i class="bi bi-pencil"></i>
         </div>
     </div>
-   
+
+
+
 </div>

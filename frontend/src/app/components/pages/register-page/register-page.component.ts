@@ -37,6 +37,7 @@ export class RegisterPageComponent {
     let user = {
       name: this.form.get('name')?.value,
       email: this.form.get('email')?.value,
+      role: 'customer',
       password: this.form.get('password')?.value,
       password_confirmation: this.form.get('password_confirmation')?.value
     };
