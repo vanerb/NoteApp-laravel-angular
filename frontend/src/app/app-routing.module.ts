@@ -11,7 +11,7 @@ import { AuthGuard } from './auth.guard';
 import { DetailsPageComponent } from './components/pages/details-page/details-page.component';
 
 const routes: Routes = [
-  { path: '', component: WelcomePageComponent },
+  { path: '', component: WelcomePageComponent,  canActivate: [AuthGuard], },
   { path: 'notes', component: NotesPageComponent, canActivate: [AuthGuard] },
   {
     path: 'admin-notes',
