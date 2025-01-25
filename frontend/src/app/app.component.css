@@ -1,0 +1,22 @@
+.custom-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 40;
+    pointer-events: all;
+}
+
+.custom-panel {
+    position: relative;
+    z-index: 50;
+    pointer-events: all;
+}
+
+.cdk-overlay-container {
+    pointer-events: none;
+}
+
+.cdk-overlay-container .cdk-overlay-backdrop,
+.cdk-overlay-container .cdk-overlay-pane {
+    pointer-events: all;
+}

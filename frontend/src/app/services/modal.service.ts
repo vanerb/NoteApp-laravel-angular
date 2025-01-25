@@ -20,8 +20,8 @@ export class ModalService {
     this.overlayRef = this.overlay.create({
       positionStrategy: overlayConfig,
       hasBackdrop: true,
-      backdropClass: 'fixed inset-0 bg-black/50 z-40', // Fondo oscuro translúcido
-      panelClass: 'fixed inset-0 flex items-center justify-center z-50', // Flex para centrar
+      backdropClass: 'custom-backdrop', 
+      panelClass: 'custom-panel', 
     });
 
     this.overlayRef.backdropClick().subscribe(() => this.closeModal());
